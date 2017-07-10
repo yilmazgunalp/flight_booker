@@ -1,0 +1,25 @@
+<h2>Flight Details</h2>
+
+<h3>Flight No</h3>
+<p><%=@booking.flight.flightno %></p>
+<h3>From</h3>
+<p><%=@booking.flight.from_airport.alias %></p>
+<h3>To:</h3>
+<p><%=@booking.flight.to_airport.alias %></p>
+<h3>Date:</h3>
+<p><%=@booking.flight.event_date_formatted %></p>
+<h3>Time:</h3>
+<p><%=@booking.time.to_s(:time)%></p>
+<h3>Duration:</h3>
+<p><%=@booking.flight.duration %></p>
+<h2>Passengers</h2>
+
+<% @booking.passengers.each_with_index do |pp,i| %>
+<h4><%=i+1 %>.</h4>
+	<h3>name:</h3>
+	<p><%=pp.name %></p>
+	<h3>email</h3>
+	<p><%=pp.email %></p>
+
+
+	<%end %>

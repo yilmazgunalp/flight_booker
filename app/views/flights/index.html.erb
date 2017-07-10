@@ -1,0 +1,56 @@
+<h1>Flights#index</h1>
+
+<%= render @flights %>
+<h2>Search Flights</h2>
+
+
+
+<form action="/flights">
+
+
+
+<label for="from">FROM</label>
+
+<%= collection_select(:flight,:from_airport,@from_options, :id, :alias) %>
+
+<label for="to">TO</label>
+<%= collection_select(:flight,:to_airport,@to_options, :id, :alias) %>
+<br>
+<br>
+<label for="passenger">Number of Passengers</label>
+<%=select_tag(:num_passengers, options_for_select([[1,1],[2,2],[3,3],[4,4]])) %>
+<br>
+<br>
+<label for="date">Select a Date</label>
+<%= select(:flight,:start_time,options_for_select(@dates)) %>
+<br>
+
+
+
+<br>
+<br>
+<input type="submit" value="Search">
+
+</form>
+
+<br><br>
+
+<% if @results %>
+<form action="/bookings/new"  >
+<% @results.each do |r| %>
+<%=radio_button_tag(:choice, "#{r.id}")%>
+<%=label_tag(:choice,"#{r.flightno}  #{r.from_airport.alias} #{r.to_airport.alias} #{r.start_time.to_s(:short)} ") %>
+<br>
+<% end %>
+<%=hidden_field_tag(:pax, params[:num_passengers]) %>
+
+<% if @message %>
+	<p><%=@message %></p>
+<% end %>
+
+<%=submit_tag( "Book") %>
+
+</form>
+
+<%end %>
+

@@ -1,0 +1,45 @@
+<h2>Bookings Details</h2>
+
+
+
+<%=form_for @booking do |f|%>
+
+<%=f.label :from %>
+<%=f.text_field :from, value: @flight.from_airport.alias %>
+<br>
+<%=f.label :to %>
+<%=f.text_field :to, value: @flight.to_airport.alias %>
+<br>
+<%=f.label :flight_id %>
+<%=f.text_field :flight_id, value: @flight.id  %>
+<br>
+<%=f.label :date %>
+<%=f.text_field :date, value: @flight.start_time.to_s(:month_and_year) %>
+<br>
+<%=f.label :time %>
+<%=f.text_field :time, value: @flight.start_time.to_s(:time) %>
+
+
+
+
+
+<ul>
+<%=f.fields_for  :passengers do |sb| %>
+<br>
+<li>
+<%=sb.label :name %>
+<%=sb.text_field  :name %>
+<br>
+<%=sb.label :email %>
+<%=sb.text_field  :email %>
+</li>
+<% end %>
+</ul>
+<br><br>
+
+<%=f.submit "Book" %>
+
+<%end %>
+
+
+
